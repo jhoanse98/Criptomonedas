@@ -1,6 +1,9 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from '@emotion/styled';
+import axios from 'axios';
 import useMoneda from '../hooks/useMoneda';
+import useCriptoMoneda from '../hooks/useCriptoMoneda';
+
 
 
 const Boton = styled.input`
@@ -25,6 +28,10 @@ transition: background-color 0.3s ease;
 `
 const Formulario = () => {
 
+    //state para guardar la consulta de las criptomonedas
+
+    const [criptoMonedaApi, GuardarCriptoMoneda] = useState([]);
+
     const opciones =[
         {codigo: 'USD', nombre: 'Dólar Estadounidense'},
         {codigo: 'COP', nombre: 'Peso Colombiano'},
@@ -39,12 +46,30 @@ const Formulario = () => {
 
     const [moneda, SeleccionMoneda] = useMoneda("Tipo de Moneda", opciones);
 
-    //y usamos SeleccionMoneda como componente a usar
+    //destructuring lo que retorna useCriptoMoneda
+
+    const [criptoMoneda, SeleccionCriptoMoneda] = useCriptoMoneda("Criptomoneda", criptoMonedaApi);
+
+
+    //useEffect para la consulta a la Api con axios
+    useEffect(()=>{
+        const consultarAPI = async () => {
+            const url= 'https://min-api.cryptocompare.com/data/top/mktcapfull?limit=10&tsym=USD';
+
+            const resultado = await axios.get(url);
+
+            GuardarCriptoMoneda(resultado.data.Data);
+
+        }
+        consultarAPI();
+    }, []);
+    //y usamos SeleccionMoneda como componente a usar y SeleccionCriptoMoneda
     return ( 
         <form>
 
 
             <SeleccionMoneda />
+            <SeleccionCriptoMoneda />
             <Boton 
                 type= "submit"
                 value="Calcular"

@@ -23,30 +23,32 @@ const Select = styled.select`
     
 `;
 
-const useMoneda = (label, opciones) => {
+const useCriptoMoneda = (label, opciones) => {
     //State y fn que actualiza el state
     const [state, actualizarState] = useState('');
 
+    console.log(opciones)
     //función que retorna la vista o sección en pantalla
 
-    const SeleccionarMoneda = () => (
+    const SeleccionarCriptoMoneda = () => (
         <Fragment>
             <Label>{label}</Label>
             <Select
                 onChange = {e => actualizarState(e.target.value)}
                 value={state}
             >            
-                <option value=''>--Seleccione Moneda--</option>
-                {opciones.map(opcion => (
-                    <option key={opcion.codigo} value={opcion.codigo}>{opcion.nombre}</option>
+                <option value=''>--Seleccione criptomoneda--</option>
+                {opciones.map( opcion => (
+                    <option key={opcion.CoinInfo.Id} value={opcion.CoinInfo.Name}>{opcion.CoinInfo.FullName}</option>
                 ))}
+               
             </Select>
         </Fragment>
     )
 
     //retornamos el State, lo que vamos a mostrar (SeleccionarMoneda) y la fn que actualiza el state
-    return [state, SeleccionarMoneda];
+    return [state, SeleccionarCriptoMoneda];
 
 }
  
-export default useMoneda;
+export default useCriptoMoneda;
