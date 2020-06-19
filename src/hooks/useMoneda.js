@@ -1,6 +1,6 @@
 import React, {useState, Fragment} from 'react'
 
-const useMoneda = () => {
+const useMoneda = (label, opciones) => {
     //State y fn que actualiza el state
     const [state, actualizarState] = useState('');
 
@@ -8,9 +8,15 @@ const useMoneda = () => {
 
     const SeleccionarMoneda = () => (
         <Fragment>
-            <label>Tipo de Moneda</label>
-            <select>
-                <option value="CO">Colombia</option>
+            <label>{label}</label>
+            <select
+                onChange = {e => actualizarState(e.target.value)}
+                value={state}
+            >            
+                <option value=''>--Seleccione Moneda--</option>
+                {opciones.map(opcion => (
+                    <option key={opcion.codigo} value={opcion.codigo}>{opcion.nombre}</option>
+                ))}
             </select>
         </Fragment>
     )

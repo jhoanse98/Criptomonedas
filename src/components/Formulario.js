@@ -25,9 +25,19 @@ transition: background-color 0.3s ease;
 `
 const Formulario = () => {
 
+    const opciones =[
+        {codigo: 'USD', nombre: 'Dólar Estadounidense'},
+        {codigo: 'COP', nombre: 'Peso Colombiano'},
+        {codigo: 'MXN', nombre: 'Peso Mexicano'},
+        {codigo: 'DOP', nombre: 'Peso Dominicano'},
+        {codigo: 'CLP', nombre: 'Peso Chileno'},
+        {codigo: 'EUR', nombre: 'Euro'},
+        {codigo: 'GBP', nombre: 'Libra Esterlina'}
+    ];
+
     //destructuring lo que retorna useMoneda
 
-    const [moneda, SeleccionMoneda, actualizaMoneda] = useMoneda();
+    const [moneda, SeleccionMoneda] = useMoneda("Tipo de Moneda", opciones);
 
     //y usamos SeleccionMoneda como componente a usar
     return ( 
