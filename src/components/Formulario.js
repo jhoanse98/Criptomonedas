@@ -27,7 +27,7 @@ transition: background-color 0.3s ease;
 
 
 `
-const Formulario = () => {
+const Formulario = ({guardarMoneda, guardarCriptoMoneda}) => {
 
     //state para guardar la consulta de las criptomonedas
 
@@ -80,6 +80,11 @@ const Formulario = () => {
         }
 
         actualizarError(false);
+
+        //pasamos los valores al componente principal
+        guardarCriptoMoneda(criptoMoneda);
+        guardarMoneda(moneda);
+
     }
     //y usamos SeleccionMoneda como componente a usar y SeleccionCriptoMoneda
     return ( 
