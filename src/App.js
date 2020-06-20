@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import axios from 'axios';
 import criptomonedas from './cryptomonedas.png';
 import Formulario from './components/Formulario';
+import Cotizacion from './components/Cotizacion';
 
 const Contenedor = styled.div`
   max-width: 900px;
@@ -37,11 +38,13 @@ const Imagen = styled.img`
   width: 100%;
   margin-top: 5rem;
 `;
-
+ 
 
 function App() {
-  const [moneda, guardarMoneda] = useState('');
-  const [criptoMoneda, guardarCriptoMoneda] = useState('');
+  const [moneda, guardarMoneda] = useState(''); //moneda
+  const [criptoMoneda, guardarCriptoMoneda] = useState(''); //criptomoneda
+  const [cotizacion, guardarCotizacion] = useState(''); //valor de cotización
+
 
   useEffect(() => {
     //evitamos la ejecución de primera vez
@@ -52,7 +55,7 @@ function App() {
 
       const resultado = await axios.get(url);
 
-      console.log(resultado.data.DISPLAY[criptoMoneda][moneda]);
+      guardarCotizacion(resultado.data.DISPLAY[criptoMoneda][moneda]);
     }
     cotizarMoneda();
   }, [moneda, criptoMoneda])
@@ -67,6 +70,9 @@ function App() {
           <Formulario
             guardarMoneda={guardarMoneda}
             guardarCriptoMoneda={guardarCriptoMoneda}
+          />
+          <Cotizacion 
+            cotizacion={cotizacion}
           />
         </div>
         
