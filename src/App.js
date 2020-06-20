@@ -44,7 +44,7 @@ const Imagen = styled.img`
 function App() {
   const [moneda, guardarMoneda] = useState(''); //moneda
   const [criptoMoneda, guardarCriptoMoneda] = useState(''); //criptomoneda
-  const [cotizacion, guardarCotizacion] = useState(''); //valor de cotización
+  const [cotizacion, guardarCotizacion] = useState({}); //valor de cotización
   const [cargando, actualizaCargando] = useState(false);
 
 
