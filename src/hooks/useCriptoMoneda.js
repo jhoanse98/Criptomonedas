@@ -27,7 +27,7 @@ const useCriptoMoneda = (label, opciones) => {
     //State y fn que actualiza el state
     const [state, actualizarState] = useState('');
 
-    console.log(opciones)
+    
     //función que retorna la vista o sección en pantalla
 
     const SeleccionarCriptoMoneda = () => (
